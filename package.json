@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "test-report": "nyc mocha test --reporter mocha-junit-reporter --reporter-options mochaFile=./test_results/results.xml",
+    "test-report": "nyc mocha test --reporter mocha-junit-reporter --reporter-options mochaFile=./test_results/junit/results.xml",
     "coverage-report": "nyc report --reporter=text-lcov > coverage.lcov",
     "codecov": "codecov"
   },
