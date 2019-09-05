@@ -1,0 +1,31 @@
+{
+  "name": "gatsby-medium-rss-feed",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "test-report": "mocha test --reporter mocha-junit-reporter --reporter-options mochaFile=./test_results/results.xml",
+    "coverage-report": "nyc report --reporter=text-lcov > coverage.lcov",
+    "codecov": "codecov"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gatsby-node-helpers": "^0.3.0",
+    "rss-parser": "^3.7.2"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "codecov": "^3.5.0",
+    "coveralls": "^3.0.6",
+    "mocha": "^6.2.0",
+    "mocha-junit-reporter": "^1.23.1",
+    "nyc": "^14.1.1",
+    "rewire": "^4.0.1",
+    "sinon": "^7.4.2",
+    "sinon-chai": "^3.3.0"
+  }
+}
