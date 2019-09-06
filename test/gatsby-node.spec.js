@@ -11,12 +11,16 @@ const plugin = rewire('../src/gatsby-node')
 
 describe("gatsby-medium-rss-feed", async () => {
 
-    let rssSpy
+    let rssStub
     let revert
+    const userName = "foobar_12345"
 
     beforeEach(() => {
-        rssSpy = sinon.spy()
-        revert = plugin.__set__('parser', {parseURL: async (url) => {rssSpy(url)}})
+        rssStub = sinon.stub()
+        rssStub.withArgs(`https://medium.com/feed/@${userName}`).resolves({fred: "blogs"})
+        rssStub.rejects({})
+
+        revert = plugin.__set__('parser', {parseURL: async (url) => {return rssStub(url)}})
     })
 
     afterEach(() => {
@@ -40,21 +44,29 @@ describe("gatsby-medium-rss-feed", async () => {
                 panic: sinon.spy()
             }
             await plugin.sourceNodes({reporter: reporter}, {i})
-            reporter.panic.should.be.calledOnce
+            reporter.panic.should.be.called
         })
 
         const reporter = {
             panic: sinon.spy()
         }
-        await plugin.sourceNodes({reporter: reporter}, {userName: "bar", name: "foo"})
+        await plugin.sourceNodes({reporter: reporter}, {userName: userName, name: "foo"})
         reporter.panic.should.not.be.called
-
     })
 
     it("parses the Medium RSS feed", async ()=> {
-        await plugin.sourceNodes({}, {userName: "foobar_12345", name: "foo"})
+        await plugin.sourceNodes({}, {userName: userName, name: "foo"})
 
-        rssSpy.should.be.calledOnce
-        rssSpy.should.be.calledWith("https://medium.com/feed/@foobar_12345")
+        rssStub.should.be.calledWith(`https://medium.com/feed/@${userName}`)
+    })
+
+    it("fails if the RSS feed fails", async () => {
+        const reporter = {
+            panic: sinon.spy()
+        }
+
+        let feed = await plugin.sourceNodes({reporter}, {userName: "bar", name: "foo"})
+
+        reporter.panic.should.be.called
     })
 })

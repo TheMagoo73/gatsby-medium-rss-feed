@@ -22,4 +22,4 @@ f = async (feed) => {
     distinctCats.forEach(c => console.log(` [${c}] `))
 }
 
-f("https://medium.com/feed/@johnclarke_82232")
+f("https://medium.com/feed/@johnclarke_8223")

@@ -1,8 +1,8 @@
 let Parser = require('rss-parser')
 let parser = new Parser()
 
-parseFeed = async (feed) => {
-   let content = await parser.parseURL(feed)    
+let parseFeed = async (feed) => {
+    let content = await parser.parseURL(feed)
 } 
 
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, reporter },
@@ -13,5 +13,11 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, repor
     }
 
     const feedURL = `https://medium.com/feed/@${userName}`
-    await parseFeed(feedURL)
+    
+    try{
+        await parseFeed(feedURL)
+    }
+    catch(err) {
+        reporter.panic("unable to parse RSS feed")
+    }
 }
