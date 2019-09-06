@@ -1,29 +1,49 @@
 {
   "name": "gatsby-medium-rss-feed",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Gatsby plugin to get information from a Medium RSS feed",
+  "main": "gatsby-node.js",
   "scripts": {
     "test": "mocha",
     "test-report": "nyc mocha test --reporter mocha-junit-reporter --reporter-options mochaFile=./test_results/junit/results.xml",
     "coverage-report": "nyc report --reporter=text-lcov > coverage.lcov",
-    "codecov": "codecov"
+    "codecov": "codecov",
+    "build": "babel src --out-dir . --ignore ./test/*.spec.js",
+    "prepare": "cross-env NODE_ENV=production npm run build"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "gatsby",
+    "medium",
+    "feed",
+    "rss",
+    "gatsby-plugin",
+    "gatsby-source",
+    "gatsby-medium-rss-feed"
+  ],
+  "author": "John Clarke <themagoo@hotmail.co.uk>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TheMagoo73/gatsby-medium-rss-feed.git"
+  },
+  "website": "https://clarkeon.tech",
+  "license": "MIT",
   "dependencies": {
     "gatsby-node-helpers": "^0.3.0",
     "rss-parser": "^3.7.2"
   },
   "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "babel-preset-gatsby-package": "^0.2.3",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "codecov": "^3.5.0",
     "coveralls": "^3.0.6",
+    "cross-env": "^5.2.1",
     "mocha": "^6.2.0",
     "mocha-junit-reporter": "^1.23.1",
     "nyc": "^14.1.1",
+    "prettier": "^1.18.2",
     "rewire": "^4.0.1",
     "sinon": "^7.4.2",
     "sinon-chai": "^3.3.0"
