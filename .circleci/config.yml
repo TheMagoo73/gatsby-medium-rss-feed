@@ -73,6 +73,4 @@ workflows:
             - build
           filters:
             tags:
-              only: /^.*/
-            branches:
-              only: master
+              only: /^v.*/
