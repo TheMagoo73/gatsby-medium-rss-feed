@@ -64,7 +64,7 @@ workflows:
   version: 2
   test-deploy-beta:
     jobs:
-      - test:
+      - build:
           filters:
             tags:
               only: /.*/
