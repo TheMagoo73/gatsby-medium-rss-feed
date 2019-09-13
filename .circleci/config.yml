@@ -45,11 +45,10 @@ jobs:
           paths: 
 
   deploy:
-    build:
-      docker:
-        - image: circleci/node:latest
+    docker:
+      - image: circleci/node:latest
 
-      working_directory: ~/repo
+    working_directory: ~/repo
 
     steps:
       - attach_workspace:
