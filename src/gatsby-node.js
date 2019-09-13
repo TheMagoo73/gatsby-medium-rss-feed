@@ -32,7 +32,8 @@ let parseFeed = async (feed) => {
             date,
             author,
             link,
-            thumbnail: thumbnails ? thumbnails[0]: "",
+            thumbnail: thumbnails ? thumbnails[0] : "",
+            categories: item.categories ? item.categories : [],
             content
         }
     })
