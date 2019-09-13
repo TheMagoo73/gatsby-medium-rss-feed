@@ -15,6 +15,10 @@ let parseFeed = async (feed) => {
     content = await parser.parseURL(feed)
 
     return content.items.map(item => {
+        const thumbnails = item.content.match(
+            /(?<=(<img[^>]+src="))([^"\s]+)(?!"[^>]*\/z)/g
+        )
+
         const {
             title,
             isoDate: date,
@@ -28,6 +32,7 @@ let parseFeed = async (feed) => {
             date,
             author,
             link,
+            thumbnail: thumbnails ? thumbnails[0]: "",
             content
         }
     })
@@ -51,7 +56,6 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, repor
     catch(err){
         reporter.panic(`unable to parse RSS feed: ${JSON.stringify(err)}`)
     }
-
 
     content.forEach(item => {
         const id = createNodeId(item.link)
