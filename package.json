@@ -1,6 +1,6 @@
 {
   "name": "gatsby-medium-rss-feed",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Gatsby plugin to get information from a Medium RSS feed",
   "main": "gatsby-node.js",
   "scripts": {

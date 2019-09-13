@@ -5,6 +5,8 @@ f = async (feed) => {
 
     let content = await parser.parseURL(feed)
 
+    console.log(JSON.stringify(content, null, 2))
+
     let cats = []
 
     content.items.map(i => {
