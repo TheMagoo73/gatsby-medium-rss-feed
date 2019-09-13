@@ -17,9 +17,22 @@ describe("gatsby-medium-rss-feed", async () => {
 
     const userName = "foobar_12345"
 
+    const testRSSItem = {
+        title: "foo",
+        isoDate: "",
+        creator: "foo@bar.com",
+        link: "https://bar.com/@foo/1234",
+        content: "lorum ipsum"
+    }
+
     beforeEach(() => {
         rssStub = sinon.stub()
-        rssStub.withArgs(`https://medium.com/feed/@${userName}`).resolves({fred: "blogs"})
+        rssStub.withArgs(`https://medium.com/feed/@${userName}`)
+        .resolves({
+            items: [
+                testRSSItem
+            ]
+        })
         rssStub.rejects({})
 
         nodeHelpers = {
@@ -64,6 +77,9 @@ describe("gatsby-medium-rss-feed", async () => {
         await plugin.sourceNodes(nodeHelpers, {userName: userName, name: "foo"})
 
         rssStub.should.be.calledWith(`https://medium.com/feed/@${userName}`)
+        nodeHelpers.createContentDigest.should.be.calledOnce
+        nodeHelpers.createNodeId.should.be.calledWith(testRSSItem.link)
+        nodeHelpers.actions.createNode.should.be.calledOnce
     })
 
     it("fails if the RSS feed fails", async () => {

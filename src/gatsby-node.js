@@ -52,6 +52,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, repor
         reporter.panic(`unable to parse RSS feed: ${JSON.stringify(err)}`)
     }
 
+
     content.forEach(item => {
         const id = createNodeId(item.link)
         const content = JSON.stringify(item)
