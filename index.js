@@ -7,6 +7,26 @@ f = async (feed) => {
 
     let cats = []
 
+    content.items.map(i => {
+        const {
+            title,
+            isoDate: date,
+            creator: author,
+            link,
+            content
+        } = i
+
+        return {
+            title,
+            date,
+            author,
+            link,
+            content
+        }
+    }).forEach(i =>{
+        console.log(JSON.stringify(i, null, 2))
+    })
+
     content.items.forEach(i => {
         console.log(`${i.title} : ${i.link}`)
         if(i.categories && i.categories.length > 0)
@@ -22,4 +42,4 @@ f = async (feed) => {
     distinctCats.forEach(c => console.log(` [${c}] `))
 }
 
-f("https://medium.com/feed/@johnclarke_8223")
+f("https://medium.com/feed/@johnclarke_82232")
